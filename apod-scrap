@@ -21,5 +21,8 @@ STRIP_SINGLE=`wget -q ${APOD_URL} -O - | grep -o '<a.*/a>' | awk -F\" '{print $2
 for SINGLE in ${STRIP_SINGLE[@]}; 
 do
   APOD_SINGLE=${APOD_HOST}/${SINGLE}
-  echo "-- Working with single page -> ${APOD_SINGLE}"
+  #echo "-- Working with single page -> ${APOD_SINGLE}"
+  STRIP_IMG=`wget -q ${APOD_SINGLE} -O - | grep "IMG SRC" | awk -F\" '{print $2}'`
+  IMG_URL=${APOD_HOST}/${STRIP_IMG}
+  echo "-- Downloading ${IMG_URL}"
 done
