@@ -1,5 +1,7 @@
 #!/bin/bash
-APOD_URL="http://apod.nasa.gov/apod/archivepix.html"
+APOD_HOST="http://apod.nasa.gov/apod"
+APOD_PAGE="archivepix.html"
+APOD_URL=${APOD_HOST}/${APOD_PAGE}
 PIC_FOLDER="./apod-photos"
 
 echo "---- BEGIN"
@@ -18,6 +20,6 @@ STRIP_SINGLE=`wget -q ${APOD_URL} -O - | grep -o '<a.*/a>' | awk -F\" '{print $2
 
 for SINGLE in ${STRIP_SINGLE[@]}; 
 do
-  echo "-- Working with single page -> ${SINGLE}"
-  
+  APOD_SINGLE=${APOD_HOST}/${SINGLE}
+  echo "-- Working with single page -> ${APOD_SINGLE}"
 done
