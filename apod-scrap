@@ -1,0 +1,23 @@
+#!/bin/bash
+APOD_URL="http://apod.nasa.gov/apod/archivepix.html"
+PIC_FOLDER="./apod-photos"
+
+echo "---- BEGIN"
+
+if [ ! -d ${PIC_FOLDER} ]; then
+  echo "-- Destination Folder doesn't exists"
+  echo "-- Creating folder"
+  mkdir ${PIC_FOLDER}
+else
+  echo "-- Destination Folder ok"
+fi
+
+echo "-- Scrapping site ${APOD_URL}"
+
+STRIP_SINGLE=`wget -q ${APOD_URL} -O - | grep -o '<a.*/a>' | awk -F\" '{print $2}' | grep -v http`
+
+for SINGLE in ${STRIP_SINGLE[@]}; 
+do
+  echo "-- Working with single page -> ${SINGLE}"
+  
+done
